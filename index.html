@@ -1,0 +1,57 @@
+<html>
+<head>
+ <title>Chuck Norris Random Facts in HTML5</title>
+ <style type="text/css">
+  #data {
+    width: 600px;
+    border: 1px dashed black;
+    font-size: 20px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 20px;
+  }
+
+  #logo {
+    width: 320px;
+    height: 320px;
+    margin: 0 auto;
+    margin-top: 50px;
+    display: block;
+  }
+ </style>
+</head>
+<body> 
+  <img id="logo" src="https://aleteiaspanish.files.wordpress.com/2016/09/web-chuck-norris-movie-invasion-c2a9-archives-du-7eme-art-afp.jpg?quality=100&strip=all&w=620&h=310&crop=1" />
+  <div id="data" />
+  <script type="text/javascript">
+    async function randomFact() {
+ 
+      let url = "https://api.chucknorris.io/jokes/random";
+      
+	  const resp = await fetch(url);
+	  
+	  const datos = await resp.json();
+	  
+	  return datos;
+	  
+	}
+	
+	function clickImg(){
+			datos = randomFact();
+	
+	datos.then(function(respuesta){
+		let fact = "<b>" + respuesta["value"] + "</b>";
+		document.getElementById("data").innerHTML = fact;
+	});
+	}
+
+	 
+    document.getElementById("logo").addEventListener("click", function() {
+      clickImg();
+    });
+
+    clickImg();
+  </script>
+</body>
+</html>
